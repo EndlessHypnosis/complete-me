@@ -24,7 +24,7 @@ describe('Trie functionality', () => {
       expect(completeMe.root).to.be.instanceOf(Node)
     })
 
-    it.skip('should be able to insert a word and root should have children', () => {
+    it('should be able to insert a word and root should have children', () => {
       completeMe.insert('apple');
 
       expect(completeMe.root.children.a.letter).to.be.equal('a')
