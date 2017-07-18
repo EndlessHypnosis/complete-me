@@ -28,13 +28,12 @@ export default class Trie {
           currNode.children[wordAsArray[i]] = new Node(wordAsArray[i]);
           currNode = currNode.children[wordAsArray[i]];
 
-          if (i === wordAsArray.length - 1) {
-            currNode.isWord = true;
-          }
+          // if (i === wordAsArray.length - 1) {
+          //   currNode.isWord = true;
+          // }
         }
-
       }
-
+      currNode.isWord = true;
 
 
     } else {

@@ -25,7 +25,7 @@ describe('Trie functionality', () => {
       expect(completeMe.root).to.be.instanceOf(Node)
     })
 
-    it('should be able to insert a word and root should have children', () => {
+    it('should be able to insert a word and root should have correct children', () => {
       completeMe.insert('apple');
 
       expect(completeMe.root.children.a.letter).to.be.equal('a')
@@ -37,11 +37,6 @@ describe('Trie functionality', () => {
         .letter
       ).to.equal('p')
 
-    })
-
-    it('should be able to insert a word and the last letter should have a isWord property of true', () => {
-      completeMe.insert('apple');
-
       expect(
         completeMe.root
         .children.a
@@ -51,6 +46,19 @@ describe('Trie functionality', () => {
         .children.e
         .letter
       ).to.equal('e')
+
+    })
+
+    it('should be able to insert a word and ONLY the last letter should have a isWord property of true', () => {
+      completeMe.insert('apple');
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .isWord
+      ).to.equal(false)
 
       expect(
         completeMe.root
@@ -78,8 +86,17 @@ describe('Trie functionality', () => {
 
     })
 
-    it('should have nodes which represent incomplete words where the isWord prop is false', () => {
+    it.only('should be able to insert multiple words correctly', () => {
+      completeMe.insert('apples');
       completeMe.insert('apple');
+      completeMe.insert('applecandy');
+      completeMe.insert('applesauce');
+      completeMe.insert('ape');
+      completeMe.insert('app');
+      completeMe.insert('apps');
+      completeMe.insert('aligator');
+      completeMe.insert('alf');
+      completeMe.insert('bubbles');
 
       expect(
         completeMe.root
