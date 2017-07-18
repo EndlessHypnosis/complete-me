@@ -86,7 +86,7 @@ describe('Trie functionality', () => {
 
     })
 
-    it.only('should be able to insert multiple words correctly', () => {
+    it('should be able to insert multiple words correctly', () => {
       completeMe.insert('apples');
       completeMe.insert('apple');
       completeMe.insert('applecandy');
@@ -213,7 +213,11 @@ describe('Trie functionality', () => {
   describe('count', () => {
     let completeMe = new Trie();
 
-    it.skip('should return number of words inserted', () => {
+    beforeEach(function() {
+      completeMe = new Trie();
+    })
+
+    it('should return number of words inserted', () => {
       expect(completeMe.count()).to.equal(0);
 
       completeMe.insert('ape');
@@ -229,7 +233,7 @@ describe('Trie functionality', () => {
       expect(completeMe.count()).to.equal(4);
     })
 
-    it.skip('should return number of words inserted', () => {
+    it('should return number of words inserted', () => {
       expect(completeMe.count()).to.equal(0);
 
       completeMe.insert('ape');
@@ -247,7 +251,8 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it.skip('should return all children words of suggestion', () => {
+    it('should return all children words of suggestion', () => {
+      completeMe.insert('app');
       completeMe.insert('apple');
       completeMe.insert('applesauce');
       completeMe.insert('apply');
@@ -256,7 +261,7 @@ describe('Trie functionality', () => {
 
       let suggestions = completeMe.suggest('app');
 
-      expect(suggestions).to.deep.equal([ 'apple', 'applesauce', 'apply' ])
+      expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
     })
   });
 
