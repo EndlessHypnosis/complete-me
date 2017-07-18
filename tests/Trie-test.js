@@ -104,8 +104,108 @@ describe('Trie functionality', () => {
         .children.p
         .children.p
         .children.l
+        .children.e
+        .children.s
         .isWord
-      ).to.equal(false);
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .children.l
+        .children.e
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .children.l
+        .children.e
+        .children.c
+        .children.a
+        .children.n
+        .children.d
+        .children.y
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .children.l
+        .children.e
+        .children.s
+        .children.a
+        .children.u
+        .children.c
+        .children.e
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.e
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .children.s
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.l
+        .children.i
+        .children.g
+        .children.a
+        .children.t
+        .children.o
+        .children.r
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.a
+        .children.l
+        .children.f
+        .isWord
+      ).to.equal(true);
+
+      expect(
+        completeMe.root
+        .children.b
+        .children.u
+        .children.b
+        .children.b
+        .children.l
+        .children.e
+        .children.s
+        .isWord
+      ).to.equal(true);
 
     })
   })

@@ -59,7 +59,7 @@ export default class Trie {
     }
 
     // this stringify version is better format.
-    console.log('TRIE:', JSON.stringify(this.root, null, 4));
+    // console.log('TRIE:', JSON.stringify(this.root, null, 4));
     // console.log('ROOT:', util.inspect(this.root, {showHidden: false, depth: null}))
 
   }
