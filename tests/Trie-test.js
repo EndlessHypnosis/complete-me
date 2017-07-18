@@ -14,8 +14,9 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it('should have a root', () => {
-      expect(completeMe.root).to.equal(null);
+    it('should have a root of empty node', () => {
+      expect(completeMe.root.letter).to.equal('');
+      expect(completeMe.root.children).to.deep.equal({});
     })
 
     it('should be able to insert a word and root should be a Node', () => {
@@ -38,7 +39,7 @@ describe('Trie functionality', () => {
 
     })
 
-    it.skip('should be able to insert a word and the last letter should have a isWord property of true', () => {
+    it('should be able to insert a word and the last letter should have a isWord property of true', () => {
       completeMe.insert('apple');
 
       expect(
@@ -62,7 +63,7 @@ describe('Trie functionality', () => {
       ).to.equal(true)
     })
 
-    it.skip('should be able to insert multiple words and children objects should have multiple props', () => {
+    it('should be able to insert multiple words and children objects should have multiple props', () => {
       completeMe.insert('apple');
       completeMe.insert('ape');
 
@@ -77,7 +78,7 @@ describe('Trie functionality', () => {
 
     })
 
-    it.skip('should have nodes which represent incomplete words where the isWord prop is false', () => {
+    it('should have nodes which represent incomplete words where the isWord prop is false', () => {
       completeMe.insert('apple');
 
       expect(
