@@ -90,38 +90,38 @@ export default class Trie {
         const child = currNode.children[keys[k]];
         let newString = word + child.letter;
         if (child.isWord) {
-          suggestionsArray.push({ 'word': newString,
-                                  'hits': child.hitCounter,
-                                  'lastTouched': child.lastTouched});
+          suggestionsArray.push({ word: newString,
+                                  hits: child.hitCounter,
+                                  lastTouched: child.lastTouched});
         }
         traverseTheTrie(newString, child);
       }
     };
 
     if (currNode && currNode.isWord) {
-      suggestionsArray.push({ 'word': word,
-                              'hits': currNode.hitCounter,
-                              'lastTouched': currNode.lastTouched});
+      suggestionsArray.push({ word: word,
+                              hits: currNode.hitCounter,
+                              lastTouched: currNode.lastTouched});
     }
 
     if (currNode) {
       traverseTheTrie(word, currNode);
     }
 
-    console.log('SA-PRESORT:', suggestionsArray);
+    // console.log('SA-PRESORT:', suggestionsArray);
 
     suggestionsArray.sort(function(a, b) {
       // return b.hits - a.hits;
-      return b["hits"] - a["hits"] || b["lastTouched"] - a["lastTouched"];
+      return b.hits - a.hits || b.lastTouched - a.lastTouched;
     })
 
-    console.log('SA-POSTSORT:', suggestionsArray);
+    // console.log('SA-POSTSORT:', suggestionsArray);
 
     let suggestArray = suggestionsArray.map(function(item) {
       return item.word;
     })
 
-    console.log('MAPPED:', suggestArray);
+    // console.log('MAPPED:', suggestArray);
 
 
 
@@ -137,7 +137,7 @@ export default class Trie {
 
   select(word) {
 
-    console.log('STUFF');
+    // console.log('STUFF');
     let wordAsArray = [...word];
     let currNode = this.root;
 
@@ -145,9 +145,9 @@ export default class Trie {
       currNode = currNode.children[wordAsArray[i]];
     }
 
-    console.log(('CURR NODE:', currNode));
+    // console.log(('CURR NODE:', currNode));
     currNode.hitCounter++;
-    currNode.lastTouched = new Date();
+    currNode.lastTouched = Date.now();
 
   }
 

@@ -5,6 +5,16 @@ const text = '/usr/share/dict/words';
 const fs = require('fs');
 
 
+function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+
+
 describe('Trie functionality', () => {
 
   describe('insert', () => {
@@ -305,19 +315,33 @@ describe('Trie functionality', () => {
       suggestions = completeMe.suggest('app');
       expect(suggestions).to.deep.equal([ 'app', 'apple', 'applesauce', 'apply' ])
 
+      sleep(10);
+
       completeMe.select('apply');
       suggestions = completeMe.suggest('app');
       expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
+
+      sleep(10);
 
       completeMe.select('apple');
       suggestions = completeMe.suggest('app');
       expect(suggestions).to.deep.equal([ 'apple', 'apply', 'app', 'applesauce' ])
 
+      sleep(10);
+
       completeMe.select('app');
+      suggestions = completeMe.suggest('app');
+      expect(suggestions).to.deep.equal([ 'app', 'apple', 'apply', 'applesauce' ])
+
+      sleep(10);
+
+      completeMe.select('apply');
+      sleep(10);
       completeMe.select('app');
+      sleep(10);
       completeMe.select('apply');
       suggestions = completeMe.suggest('app');
-      expect(suggestions).to.deep.equal([ 'app', 'apply', 'apple', 'applesauce' ])
+      expect(suggestions).to.deep.equal([ 'apply', 'app', 'apple', 'applesauce' ])
     })
   })
 

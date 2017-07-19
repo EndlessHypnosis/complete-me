@@ -5,7 +5,7 @@ export default class Node {
     this.isWord = false;
     this.children = {};
     this.hitCounter = 0;
-    this.lastTouched = new Date(1990, 1, 1);
+    this.lastTouched = 0;
   }
 
 }
