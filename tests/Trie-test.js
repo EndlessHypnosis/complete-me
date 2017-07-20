@@ -1,8 +1,7 @@
 import { expect } from 'chai';
 import Trie from '../scripts/Trie';
 import Node from '../scripts/Node';
-const text = '/usr/share/dict/words';
-const fs = require('fs');
+
 
 
 function sleep(milliseconds) {

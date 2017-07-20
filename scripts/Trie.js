@@ -1,5 +1,7 @@
 import Node from './Node';
+import dictionary from './words';
 const util = require('util');
+const text = '/usr/share/dict/words';
 
 export default class Trie {
   constructor() {
@@ -66,10 +68,6 @@ export default class Trie {
   count () {
     return this.wordCount;
   }
-
-
-
-
 
 
   suggest(word) {
@@ -151,10 +149,12 @@ export default class Trie {
 
   }
 
-  populate(dictionary) {
+  populate() {
+    //let dictionary = fs.readFileSync(text).toString().trim().split('\n');
     dictionary.forEach(word => {
-      this.insert(word);
-    })
+      this.insert(word.toLowerCase());
+    });
+
   }
 
 
