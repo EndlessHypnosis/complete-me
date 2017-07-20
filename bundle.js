@@ -235,6 +235,7 @@ var Trie = function () {
       var currNode = this.root;
       var suggestionsArray = [];
 
+      // traverse the array until we reach the last letter's node
       for (var i = 0; i < arrayOfLetters.length && currNode; i++) {
         currNode = currNode.children[arrayOfLetters[i]];
       }
@@ -273,11 +274,9 @@ var Trie = function () {
       });
 
       // we need to pull out only the words from our sorted array
-      var suggestArray = suggestionsArray.map(function (item) {
+      return suggestionsArray.map(function (item) {
         return item.word;
       });
-
-      return suggestArray;
     }
   }, {
     key: 'select',
@@ -289,8 +288,10 @@ var Trie = function () {
         currNode = currNode.children[letter];
       });
 
-      currNode.hitCounter++;
-      currNode.lastTouched = Date.now();
+      if (currNode) {
+        currNode.hitCounter++;
+        currNode.lastTouched = Date.now();
+      }
     }
   }, {
     key: 'populate',

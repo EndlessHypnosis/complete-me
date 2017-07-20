@@ -1,5 +1,5 @@
 import Node from './Node';
-import dictionary from './words';
+import dictionary from './words.json';
 
 export default class Trie {
 
@@ -12,16 +12,16 @@ export default class Trie {
     const arrayOfLetters = [...word];
     let currNode = this.root;
 
-    arrayOfLetters.forEach(letter => {
+    arrayOfLetters.forEach((letter) => {
       if (!currNode.children[letter]) {
         currNode.children[letter] = new Node(letter);
       }
       currNode = currNode.children[letter];
-    })
+    });
 
     if (!currNode.isWord) {
       currNode.isWord = true;
-      this.wordCount++;
+      this.wordCount += 1;
     }
 
     // view the entire tree
@@ -35,33 +35,34 @@ export default class Trie {
   suggest(word) {
     const arrayOfLetters = [...word];
     let currNode = this.root;
-    let suggestionsArray = [];
+    const suggestionsArray = [];
 
+    // traverse the array until we reach the last letter's node
     for (let i = 0; i < arrayOfLetters.length && currNode; i++) {
       currNode = currNode.children[arrayOfLetters[i]];
     }
 
     // currNode now refers to the last leter in our word
-    const searchTree = (word, currNode) => {
-      const keys = Object.keys(currNode.children);
+    const searchTree = (currentWord, currentNode) => {
+      const keys = Object.keys(currentNode.children);
 
-      keys.forEach(key => {
-        const child = currNode.children[key];
-        const wordBuilder = word + child.letter;
+      keys.forEach((key) => {
+        const child = currentNode.children[key];
+        const wordBuilder = currentWord + child.letter;
         if (child.isWord) {
           suggestionsArray.push({ word: wordBuilder,
                                   hits: child.hitCounter,
-                                  lastTouched: child.lastTouched});
+                                  lastTouched: child.lastTouched });
         }
         searchTree(wordBuilder, child);
-      })
-    }
+      });
+    };
 
     // if the word we are suggesting is a word in the trie itself
     if (currNode && currNode.isWord) {
       suggestionsArray.push({ word: word,
                               hits: currNode.hitCounter,
-                              lastTouched: currNode.lastTouched});
+                              lastTouched: currNode.lastTouched });
     }
 
     // this kicks off the recursive call
@@ -71,16 +72,14 @@ export default class Trie {
 
     // this sorts by hits then by lastTouched
     suggestionsArray.sort((a, b) => {
-      return  b.hits - a.hits ||
-              b.lastTouched - a.lastTouched;
-    })
+      return b.hits - a.hits ||
+             b.lastTouched - a.lastTouched;
+    });
 
     // we need to pull out only the words from our sorted array
-    const suggestArray = suggestionsArray.map(item => {
+    return suggestionsArray.map((item) => {
       return item.word;
-    })
-
-    return suggestArray;
+    });
   }
 
   select(word) {
@@ -89,16 +88,18 @@ export default class Trie {
 
     arrayOfLetters.forEach(letter => {
       currNode = currNode.children[letter];
-    })
+    });
 
-    currNode.hitCounter++;
-    currNode.lastTouched = Date.now();
+    if (currNode) {
+      currNode.hitCounter += 1;
+      currNode.lastTouched = Date.now();
+    }
   }
 
   populate() {
-    dictionary.forEach(word => {
+    dictionary.forEach((word) => {
       this.insert(word.toLowerCase());
-    })
+    });
   }
 
 }

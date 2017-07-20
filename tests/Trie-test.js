@@ -3,8 +3,8 @@ import Trie from '../scripts/Trie';
 import Node from '../scripts/Node';
 
 function sleep(milliseconds) {
-  var start = new Date().getTime();
-  for (var i = 0; i < 1e7; i++) {
+  const start = new Date().getTime();
+  for (let i = 0; i < 1e7; i++) {
     if ((new Date().getTime() - start) > milliseconds){
       break;
     }
@@ -52,7 +52,6 @@ describe('Trie functionality', () => {
                 .children.p
                   .children.l
                     .children.e.letter).to.equal('e');
-
     })
 
     it('should be able to insert a word and the last nodes to be correct', () => {
@@ -113,7 +112,6 @@ describe('Trie functionality', () => {
       );
 
       expect(childKeys).to.deep.equal(['p', 'e']);
-
     })
 
     it('should be able to insert multiple words correctly', () => {
@@ -236,7 +234,6 @@ describe('Trie functionality', () => {
         .children.s
         .isWord
       ).to.equal(true);
-
     })
   })
 
@@ -304,7 +301,6 @@ describe('Trie functionality', () => {
 
       let suggestions = completeMe.suggest('apple');
       expect(suggestions).to.deep.equal([ 'apple', 'applesauce'])
-
     })
 
     it('should return all matches of a complex tree', () => {
@@ -339,7 +335,6 @@ describe('Trie functionality', () => {
     })
 
   });
-
 
 
   describe('select', () => {
