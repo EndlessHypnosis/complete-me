@@ -2,8 +2,6 @@ import { expect } from 'chai';
 import Trie from '../scripts/Trie';
 import Node from '../scripts/Node';
 
-
-
 function sleep(milliseconds) {
   var start = new Date().getTime();
   for (var i = 0; i < 1e7; i++) {
@@ -12,7 +10,6 @@ function sleep(milliseconds) {
     }
   }
 }
-
 
 describe('Trie functionality', () => {
 
@@ -23,28 +20,43 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
+    it('should have a root node', () => {
+      expect(completeMe.root).to.be.instanceOf(Node);
+    })
+
     it('should have a root of empty node', () => {
       expect(completeMe.root.letter).to.equal('');
       expect(completeMe.root.children).to.deep.equal({});
     })
 
-    it('should be able to insert a word and root should be a Node', () => {
+    it('should be able to insert a word and build the correct trie', () => {
       completeMe.insert('apple');
 
-      expect(completeMe.root).to.be.instanceOf(Node)
+      expect(completeMe.root
+            .children.a.letter).to.equal('a');
+      expect(completeMe.root
+            .children.a
+              .children.p.letter).to.equal('p');
+      expect(completeMe.root
+            .children.a
+              .children.p
+                .children.p.letter).to.equal('p');
+      expect(completeMe.root
+            .children.a
+              .children.p
+                .children.p
+                  .children.l.letter).to.equal('l');
+      expect(completeMe.root
+            .children.a
+              .children.p
+                .children.p
+                  .children.l
+                    .children.e.letter).to.equal('e');
+
     })
 
-    it('should be able to insert a word and root should have correct children', () => {
+    it('should be able to insert a word and the last nodes to be correct', () => {
       completeMe.insert('apple');
-
-      expect(completeMe.root.children.a.letter).to.be.equal('a')
-
-      expect(
-        completeMe.root
-        .children.a
-        .children.p
-        .letter
-      ).to.equal('p')
 
       expect(
         completeMe.root
@@ -56,6 +68,15 @@ describe('Trie functionality', () => {
         .letter
       ).to.equal('e')
 
+      expect(
+        completeMe.root
+        .children.a
+        .children.p
+        .children.p
+        .children.l
+        .children.e
+        .isWord
+      ).to.equal(true)
     })
 
     it('should be able to insert a word and ONLY the last letter should have a isWord property of true', () => {
@@ -80,7 +101,7 @@ describe('Trie functionality', () => {
       ).to.equal(true)
     })
 
-    it('should be able to insert multiple words and children objects should have multiple props', () => {
+    it('should be able to insert multiple words and children object should have multiple branches', () => {
       completeMe.insert('apple');
       completeMe.insert('ape');
 
@@ -219,6 +240,8 @@ describe('Trie functionality', () => {
     })
   })
 
+
+
   describe('count', () => {
     let completeMe = new Trie();
 
@@ -242,7 +265,7 @@ describe('Trie functionality', () => {
       expect(completeMe.count()).to.equal(4);
     })
 
-    it('should return number of words inserted', () => {
+    it('should return number of words inserted (ignoring duplicates)', () => {
       expect(completeMe.count()).to.equal(0);
 
       completeMe.insert('ape');
@@ -250,8 +273,13 @@ describe('Trie functionality', () => {
 
       completeMe.insert('ape');
       expect(completeMe.count()).to.equal(1);
+
+      completeMe.insert('apple');
+      expect(completeMe.count()).to.equal(2);
     })
   });
+
+
 
   describe('suggest', () => {
     let completeMe;
@@ -260,7 +288,26 @@ describe('Trie functionality', () => {
       completeMe = new Trie();
     })
 
-    it('should return all children words of suggestion', () => {
+    it('should return nothing for an unmatched suggestion', () => {
+
+      completeMe.insert('app');
+      let suggestions = completeMe.suggest('appx');
+      expect(suggestions).to.deep.equal([]);
+    })
+
+    it('should return all matches of a simple trie', () => {
+
+      completeMe.insert('app');
+      completeMe.insert('apple');
+      completeMe.insert('applesauce');
+      completeMe.insert('apply');
+
+      let suggestions = completeMe.suggest('apple');
+      expect(suggestions).to.deep.equal([ 'apple', 'applesauce'])
+
+    })
+
+    it('should return all matches of a complex tree', () => {
 
       completeMe.insert('app');
       completeMe.insert('apple');
@@ -292,6 +339,8 @@ describe('Trie functionality', () => {
     })
 
   });
+
+
 
   describe('select', () => {
     let completeMe;

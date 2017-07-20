@@ -7,31 +7,20 @@
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
-  <h1>Complete Me</h1>
-
+    <h1 class="title">Complete<span class="box">Me</span></h1>
+    <br>
   <button class="btn-regular" id="btn-populate">Populate With Dictionary</button>
-
-  <br><br>
-
-  <label for="txt-insert">Insert Word</label>
-  <input class="txt-input" type="text" name="insert" id="txt-insert" value="">
-  <button class="btn-regular" id="btn-insert">Insert</button>
-
-  <br><br>
-
   <button class="btn-regular" id="btn-count">Get Trie Count</button>
   <label id="lbl-count"></label>
-
   <br><br>
-
-  <label for="txt-suggest">Suggest Word</label>
+  <label for="txt-insert" id="lbl-insert">Insert Word</label>
+  <input class="txt-input" type="text" name="insert" id="txt-insert" value="">
+  <button class="btn-regular" id="btn-insert">Insert</button>
+  <br><br>
+  <label for="txt-suggest" id="lbl-suggest">Suggest Word</label>
   <input class="txt-input" type="text" name="suggest" id="txt-suggest" value="">
-  <!-- <input type="button" id="btn-suggest" value="Suggest"> -->
-
   <br><br>
-
   <div id="div-suggest"></div>
-
   <script type="text/javascript" src="bundle.js" charset="utf-8"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   </body>

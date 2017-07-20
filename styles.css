@@ -4,6 +4,31 @@ body {
   font-size: 16px;
   font-weight: 400;
   font-family: 'Roboto Slab', serif;
+  padding: 20px;
+}
+
+.title {
+  margin: 0;
+  padding: 20px;
+  color: #00A79D;
+  font-size: 50px;
+  text-align: center;
+}
+
+.box {
+  color: #6D6E71;
+}
+
+#lbl-insert {
+  margin-right: 30px;
+}
+
+#lbl-suggest {
+  margin-right: 15px;
+}
+
+#div-suggest {
+  margin-left: 120px;
 }
 
 .txt-input {
@@ -18,7 +43,7 @@ body {
 
 .btn-regular {
   height: 40px;
-  margin: 10px auto;
+  margin: 10px;
   border: none;
   background-color: #00A79D;
   color: #FFFFFF;
