@@ -16,7 +16,7 @@ txtSuggest.addEventListener('input', suggestWord);
 
 var completeMe;
 
-document.addEventListener("DOMContentLoaded", function(){
+document.addEventListener("DOMContentLoaded", function () {
   completeMe = new Trie();
 });
 
@@ -49,7 +49,7 @@ function suggestWord() {
         suggestItem.value = `${suggestions[i]}`;
         suggestItem.innerText = `${suggestions[i]}`;
 
-        suggestItem.addEventListener('click', function(event) {
+        suggestItem.addEventListener('click', function (event) {
           select(event);
         });
 

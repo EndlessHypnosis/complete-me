@@ -50,9 +50,11 @@ export default class Trie {
         const child = currentNode.children[key];
         const wordBuilder = currentWord + child.letter;
         if (child.isWord) {
-          suggestionsArray.push({ word: wordBuilder,
-                                  hits: child.hitCounter,
-                                  lastTouched: child.lastTouched });
+          suggestionsArray.push({
+            word: wordBuilder,
+            hits: child.hitCounter,
+            lastTouched: child.lastTouched
+          });
         }
         searchTree(wordBuilder, child);
       });
@@ -60,9 +62,11 @@ export default class Trie {
 
     // if the word we are suggesting is a word in the trie itself
     if (currNode && currNode.isWord) {
-      suggestionsArray.push({ word: word,
-                              hits: currNode.hitCounter,
-                              lastTouched: currNode.lastTouched });
+      suggestionsArray.push({
+        word: word,
+        hits: currNode.hitCounter,
+        lastTouched: currNode.lastTouched
+      });
     }
 
     // this kicks off the recursive call
@@ -73,7 +77,7 @@ export default class Trie {
     // this sorts by hits then by lastTouched
     suggestionsArray.sort((a, b) => {
       return b.hits - a.hits ||
-             b.lastTouched - a.lastTouched;
+        b.lastTouched - a.lastTouched;
     });
 
     // we need to pull out only the words from our sorted array
